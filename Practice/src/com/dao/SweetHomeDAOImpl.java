@@ -15,6 +15,7 @@ public class SweetHomeDAOImpl implements SweetHomeDAO {
 
 	Connection con = ConnectionProvider.getConnection();
 	String query = null;
+	static int y = 0;
 
 	public String getQuery() {
 		if (query == null) {
@@ -120,15 +121,23 @@ public class SweetHomeDAOImpl implements SweetHomeDAO {
 	}
 
 	@Override
-	public int addProperty( String username, String ptype, String city, String location, int price,
-			int rent, int deposit, int bedroom_no, int bathroom_no, String residence_type, String furnishing,
-			String payment_mode, String transport_mode, String extra_facility, InputStream image) {
+	public int addProperty(String username, String ptype, String city, String location, int price, int rent,
+			int deposit, int bedroom_no, int bathroom_no, String residence_type, String furnishing, String payment_mode,
+			String transport_mode, String extra_facility, InputStream image, int propertyId) {
 
 		PreparedStatement ps;
 		try {
+			ps = con.prepareStatement("select * from data1");
+			ResultSet rs1 = ps.executeQuery();
 
-			ps = con.prepareStatement("insert into data1 values(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)");
-		
+			while (rs1.next()) {
+				System.out.println("here");
+				y++;
+
+			}
+			System.out.println(y + "--------");
+			ps = con.prepareStatement("insert into data1 values(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)");
+
 			ps.setString(1, username);
 			ps.setString(2, ptype);
 			ps.setString(3, city);
@@ -144,6 +153,7 @@ public class SweetHomeDAOImpl implements SweetHomeDAO {
 			ps.setString(13, transport_mode);
 			ps.setString(14, extra_facility);
 			ps.setBlob(15, image);
+			ps.setInt(16, y);
 			int i = ps.executeUpdate();
 			return i;
 		} catch (SQLException e) {
@@ -157,6 +167,22 @@ public class SweetHomeDAOImpl implements SweetHomeDAO {
 	@Override
 	public void showInterest(int propertyId, String username, String message) {
 		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	public void mail(String from, String to, String message) {
+		PreparedStatement ps;
+		try {
+			ps = con.prepareStatement("Insert into mail values (?,?,?)");
+			ps.setString(1, from);
+			ps.setString(2, to);
+			ps.setString(3, message);
+			ps.executeQuery();
+		} catch (SQLException e) {
+
+			e.printStackTrace();
+		}
 
 	}
 }

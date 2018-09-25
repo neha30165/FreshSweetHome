@@ -3,7 +3,6 @@
   <display-name>Practice</display-name>
   <welcome-file-list>
     <welcome-file>index.html</welcome-file>
-    
   </welcome-file-list>
   <servlet>
     <description></description>
@@ -44,5 +43,15 @@
   <servlet-mapping>
     <servlet-name>UploadImage</servlet-name>
     <url-pattern>/UploadImage</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>Mail</display-name>
+    <servlet-name>Mail</servlet-name>
+    <servlet-class>com.project.servlet1.Mail</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>Mail</servlet-name>
+    <url-pattern>/Mail</url-pattern>
   </servlet-mapping>
 </web-app>

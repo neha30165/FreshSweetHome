@@ -51,9 +51,10 @@ public class UploadImage extends HttpServlet {
 				String transport_mode = req.getParameter("transport_mode");
 				String extra_facility = req.getParameter("extra_facility");
 				InputStream is = part.getInputStream();
+				int propertyId=0;
 				SweetHomeDAOImpl dampl = new SweetHomeDAOImpl();
-			result=dampl.addProperty( username, ptype, city, location, price, rent, deposit, bedroom_no,
-						bathroom_no, residence_type, furnishing, payment_mode, transport_mode, extra_facility, is);
+			result=dampl.addProperty(username, ptype, city, location, price, rent, deposit, bedroom_no,
+						bathroom_no, residence_type, furnishing, payment_mode, transport_mode, extra_facility, is,propertyId);
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
@@ -61,7 +62,7 @@ public class UploadImage extends HttpServlet {
 		}
 
 		if (result > 0) {
-			resp.sendRedirect("buyerDashboard.jsp");
+			resp.sendRedirect("index.html");
 		} else {
 			resp.sendRedirect("result.jsp?message=Some+Error+Occurred");
 		}

@@ -10,6 +10,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import com.dao.SweetHomeDAO;
 import com.dao.SweetHomeDAOImpl;
@@ -20,10 +21,8 @@ public class RegistrationServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	@Override
-	protected void doGet(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
-		
-		String fullname = request.getParameter("fullname");
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
+	{		String fullname = request.getParameter("fullname");
 		String username = request.getParameter("username");
 		String password = request.getParameter("password");
 		
@@ -44,7 +43,7 @@ public class RegistrationServlet extends HttpServlet {
                if(contact.contains("e"))
                {
             	   error  ="Contact Number is not correct";
-            	   RequestDispatcher rd = request.getRequestDispatcher("login.jsp");
+            	   RequestDispatcher rd = request.getRequestDispatcher("Registration.jsp");
             	   request.setAttribute("error", error);
             	   rd.forward(request,response);
             	
@@ -52,7 +51,7 @@ public class RegistrationServlet extends HttpServlet {
                if(match==0)
                {
             	   error="Password and confirm Password are not same";
-            	   RequestDispatcher rd = request.getRequestDispatcher("login.jsp");
+            	   RequestDispatcher rd = request.getRequestDispatcher("Registration.jsp");
             	   request.setAttribute("error", error);
             	   rd.forward(request,response);
             	

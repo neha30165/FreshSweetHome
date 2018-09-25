@@ -39,17 +39,20 @@ public class LoginServlet extends HttpServlet {
 	{
 	if(usertype.equalsIgnoreCase("buyer"))
 	{
-		HttpSession session1= request.getSession();
-		session1.setAttribute("username",username);
-
+		SweetHomeDAOImpl daoObj= new SweetHomeDAOImpl();
+		
+		HttpSession session=request.getSession(true);
+		session.setAttribute("daoObj", daoObj);
+		session.setAttribute("username", username);
 		response.sendRedirect("buyerDashboard.jsp");
 		
 		
 	}
 	else if(usertype.equalsIgnoreCase("seller"))
 	{
-		HttpSession session1= request.getSession();
-		session1.setAttribute("username",username);
+		HttpSession session= request.getSession();
+	
+		session.setAttribute("username",username);
 		response.sendRedirect("Seller.jsp");
 	}
 	}

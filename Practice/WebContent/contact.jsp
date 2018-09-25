@@ -29,7 +29,7 @@
 <link rel="stylesheet" href="css/bootstrap.css">
 <link rel="stylesheet" href="css/owl.carousel.css">
 <link rel="stylesheet" href="css/main.css">
-<title>Insert title here</title>
+<title>contact</title>
 <style>
 .default-header1 {
   
@@ -70,7 +70,7 @@ background-image: url('img/bg5.jpg');
 								<li><a href="guest.jsp">Guest</a></li>
 								<li><a href="help.jsp">Help</a></li>
 								<li><a href="contact.jsp">Contact</a></li>
-								<li><a href="#team">team</a></li>
+							<li><a href="team.jsp">team</a></li>
 				<!-- Dropdown -->
 
 			</ul>
@@ -78,5 +78,23 @@ background-image: url('img/bg5.jpg');
 	</div>
 	</nav> </header>
 	<!-- End Header Area -->
+	<centre>
+	<div class='list-bottom-section'>
+						<span>Abhishek Kala </span>
+					</div>
+	  <div class='list-bottom-section'>
+						<span> Nitish Kumar </span>
+					</div>
+		 <div class='list-bottom-section'>
+						<span>Aarzoo Patwa </span>
+					</div>
+					
+					<div class='list-bottom-section'>
+						<span> Neha Tripathi </span>
+					</div>
+					<div class='list-bottom-section'>
+						<span> Anjula Yadav </span>
+					</div>
+			</centre>
 </body>
 </html>

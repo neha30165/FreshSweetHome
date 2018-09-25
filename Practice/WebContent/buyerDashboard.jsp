@@ -1,3 +1,4 @@
+<%@page import="javax.xml.ws.Response"%>
 <%@page import="com.sun.net.httpserver.HttpsConfigurator"%>
 <%@page import="com.dao.SweetHomeDAOImpl"%>
 <%@page import="java.sql.ResultSet"%>
@@ -5,19 +6,16 @@
 <%@page import="java.sql.DriverManager"%>
 <%@page import="java.sql.Connection"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-	pageEncoding="ISO-8859-1" session="false"%>
+	pageEncoding="ISO-8859-1" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
 <script type="text/javascript">
-<link href='https://fonts.googleapis.com/css?family=Lato'
-	rel='stylesheet' type='text/css'>
-function addToCart(var propertyid)
-{
-	alert("Hello");
-	}
+
 
 </script>
+<link href='https://fonts.googleapis.com/css?family=Lato' rel='stylesheet' type='text/css'>
+
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 
 <title>Buyer Dashboard</title>
@@ -68,7 +66,7 @@ hr {
 				<li><a href="guest.jsp"><font color="white">Guest</font></a></li>
 				<li><a href="help.jsp"><font color="white">Help</font></a></li>
 				<li><a href="contact.jsp"><font color="white">Contact</font></a></li>
-				<li><a href="#team"><font color="white">Team</font></a></li>
+				<li><a href="team.jsp">team</a></li>
 				<li><img src="img/cart.png"></li>
 				<li><a href="filterPage.jsp"><img src="img/filter.png"></a></li>
 				<!-- Dropdown -->
@@ -80,31 +78,41 @@ hr {
 	<br>
 
 	<%
-HttpSession session=request.getSession(false);
-	if(session==null)
-	{
-		SweetHomeDAOImpl sdi = new SweetHomeDAOImpl();
-		String query1 = sdi.getQuery();
+	
+	//---------------------------------------------------change
+		
+		System.out.println("in buyer dashboard");
+		SweetHomeDAOImpl obj=(SweetHomeDAOImpl)session.getAttribute("daoObj");	
+		String query=obj.getQuery();
+		
+		
 		Class.forName("oracle.jdbc.driver.OracleDriver");
 		Connection con = DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:xe", "hr", "hr");
-		PreparedStatement ps = con.prepareStatement(query1);
+		PreparedStatement ps = con.prepareStatement(query);
 		ResultSet rs = ps.executeQuery();
-		while (rs.next()) {
+		while (rs.next()) 
+		
+		{
+			//System.out.print(rs.getInt(16)+"asdfghjkl");
+			//System.out.println(from);
+			String to = rs.getString("username");
+			System.out.println(to);
+			String message = "interested";
+			String propertyId= rs.getString("propertyId");
+			
 	%>
 	<div class='container'>
 		<div class='list-card ' style="box-shadow: 1px 10px 20px grey;">
 			<div class='list-label'>NEW LAUNCH</div>
-			<img alt='' src='getImage.jsp?id=<%=rs.getString("propertyId")%>'
-				style="height: 217px">
+			<img alt='' src='getImage.jsp?id=<%=rs.getInt(16) %>'style="height: 217px">
 
 			<div class='list-details'>
 				<div class='list-name'><%=rs.getString("ptype")%></div>
-				<button class='list-callback'
-					onclick="addToCart(<%=rs.getInt("propertyid")%>)">Add to
-					Cart</button>
-
+				
+			<a href="mail.jsp?to=<%=to %>&message=<%=message %>&propertyId=<%=propertyId%>"> Wishlist  </a>
+				<a href="yourMails.jsp" > View Mails  </a>
 				<div class='list-landmark'>Neptune Group</div>
-				<div class='list-location'><%=rs.getString("location")%>,
+				<div class='list-location'><%=rs.getString("location")%>
 					<%=rs.getString("city")%></div>
 				<div class='list-rooms'><%=rs.getString("bedroom_no")%>, 3, 4
 					BHK Apartments & Penthouse
@@ -128,59 +136,8 @@ HttpSession session=request.getSession(false);
 	</div>
 	</link>
 
-	<%
+	<% 
 		}
-	}
-	else
-	{
-		String query=(String)session.getAttribute("query");
-		Class.forName("oracle.jdbc.driver.OracleDriver");
-		Connection con = DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:xe", "hr", "hr");
-		PreparedStatement ps = con.prepareStatement(query);
-		ResultSet rs = ps.executeQuery();	
-		while (rs.next()) {
-			%>
-			<div class='container'>
-				<div class='list-card ' style="box-shadow: 1px 10px 20px grey;">
-					<div class='list-label'>NEW LAUNCH</div>
-					<img alt='' src='getImage.jsp?id=<%=rs.getString("propertyId")%>'
-						style="height: 217px">
-
-					<div class='list-details'>
-						<div class='list-name'><%=rs.getString("ptype")%></div>
-						<button class='list-callback'
-							onclick="addToCart(<%=rs.getInt("propertyid")%>)">Add to
-							Cart</button>
-
-						<div class='list-landmark'>Neptune Group</div>
-						<div class='list-location'><%=rs.getString("location")%>,
-							<%=rs.getString("city")%></div>
-						<div class='list-rooms'><%=rs.getString("bedroom_no")%>, 3, 4
-							BHK Apartments & Penthouse
-						</div>
-						<div class='list-price'><%=rs.getInt("price")%></div>
-						<div class='list-bottom'>
-							<div class='list-bottom-section'>
-								<span>1200/sqft</span> <span>Avg Price/sq.ft.</span>
-							</div>
-							<div class='list-bottom-section'>
-								<span>1200/sqft</span> <span>Carpet Area</span>
-							</div>
-							<div class='list-bottom-section'>
-								<span>1200/sqft</span> <span>Carpet Area</span>
-							</div>
-						</div>
-					</div>
-				</div>
-				<br></br>
-
-			</div>
-			</link>
-
-			<%
-				}
-		}
-	
-	%>
+		%>
 </body>
 </html>

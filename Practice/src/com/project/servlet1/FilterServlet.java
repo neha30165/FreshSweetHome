@@ -63,10 +63,10 @@ public class FilterServlet extends HttpServlet {
 		query+=")";
 		System.out.println("Query: "+query);
 		
-		SweetHomeDAOImpl obj=new SweetHomeDAOImpl();
-		obj.setFilteredQuery(query);
-		HttpSession session=request.getSession(true);
-		session.setAttribute("query",query);
+		HttpSession session=request.getSession(false);
+		SweetHomeDAOImpl daoObj=(SweetHomeDAOImpl)session.getAttribute("daoObj");
+		daoObj.setFilteredQuery(query);
+		
 		response.sendRedirect("buyerDashboard.jsp");
 		
 	}

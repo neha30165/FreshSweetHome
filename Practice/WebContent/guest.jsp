@@ -70,7 +70,7 @@ background-image: url('img/bg5.jpg');
 								<li><a href="guest.jsp">Guest</a></li>
 								<li><a href="help.jsp">Help</a></li>
 								<li><a href="contact.jsp">Contact</a></li>
-								<li><a href="#team">team</a></li>
+								<li><a href="team.jsp">team</a></li>
 				<!-- Dropdown -->
 
 			</ul>

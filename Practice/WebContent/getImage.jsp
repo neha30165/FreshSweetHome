@@ -15,15 +15,15 @@
 <body>
 
 	<%
-		String id = request.getParameter("id");
 		Connection con = null;
-
+     int id= Integer.parseInt(request.getParameter("id"));
+     System.out.print(id+"--------------------------------------------------");
 		try {
 			Class.forName("oracle.jdbc.driver.OracleDriver");
 			con=DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:xe","hr","hr");
 
 			PreparedStatement ps = con.prepareStatement("select image from data1 where propertyId=?");
-			ps.setInt(1,Integer.parseInt(id));
+			ps.setInt(1,id);
 			ResultSet rs = ps.executeQuery();
 			Blob blob;
 			OutputStream os =null;

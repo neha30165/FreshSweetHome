@@ -19,9 +19,10 @@ public interface SweetHomeDAO {
 	public void addToCart(String propertyId , String username);
 	
 	public int addProperty( String username , String ptype,  String city , String location , int price ,int rent ,
-			int deposit ,int bedroom_no ,int bathroom_no ,String residence_type ,String furnishing,String payment_mode ,String transport_mode ,String extra_facility,InputStream image);
+			int deposit ,int bedroom_no ,int bathroom_no ,String residence_type ,String furnishing,String payment_mode ,String transport_mode ,String extra_facility,InputStream image,int propertyId );
 	
 	public void showInterest(int propertyId,String username,String message); 
+	public void mail(String from ,String to,String message);
 	
 }
 

@@ -17,7 +17,6 @@ l<%@page import="java.sql.ResultSet"%>
         <b>View | <a href="imageupload.jsp">Upload</a></b><br/><br/>
         
 		<%
-		String id = request.getParameter("propertyId");
 		Class.forName("oracle.jdbc.driver.OracleDriver");
 	Connection	con=DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:xe","hr","hr");
 
@@ -29,7 +28,7 @@ l<%@page import="java.sql.ResultSet"%>
 		while(rs.next())
 		{
 			%>
-			<tr><td><img src="getImage.jsp?id=<%=rs.getString("propertyId") %>" width="400px"/></td>
+			<tr><td><img src="getImage.jsp?id=<%=rs.getInt(16) %>" width="400px"/></td>
 			<tr><td><p>Available as :<td><%=rs.getString("residence_type") %></p><tr>
 			<td><p>Property is located at :<%=rs.getString("location") %></p>
 			<td><p>City :<%=rs.getString("city") %></p>
